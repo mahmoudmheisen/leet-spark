@@ -10,24 +10,20 @@
  * };
  */
 class Solution {
-public:
-    // inorder traverse should return sorted data
-    bool isBST(TreeNode* root, TreeNode*& prev) {
-      if (!root) return true;
-            
-      // if (root->left && root->left->val >= root->val) return false;
-      if (!isBST(root->left, prev)) return false;
-      // if(prev)cout << prev->val <<endl;
-      // here it will print sorted array and we need prev node
-      if (prev && root->val <= prev->val) return false;
-      
-      prev = root;
-      return isBST(root->right, prev); // when u go right, the prev is the root
-    }
+  private:
+    TreeNode* prev = nullptr;
   
+  public:
+    // inorder traverse should return sorted data
     bool isValidBST(TreeNode* root) {
       if (!root) return true;
-      TreeNode *prev = NULL;
-      return isBST(root, prev);
+      
+      if (!isValidBST(root->left)) return false;
+      
+      // here it will print sorted array and we need prev node
+      if (prev && root->val <= prev->val) return false;
+
+      prev = root;
+      return isValidBST(root->right); // when u go right, the prev is the root
     }
 };
