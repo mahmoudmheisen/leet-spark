@@ -1,10 +1,10 @@
 # Write your MySQL query statement below
-select id, 
+select tree.id, 
 case
-  when p_id is null then 'Root'
-  when id in (
-    select distinct p_id from Tree
+  when tree.p_id is null then 'Root'
+  when tree.id in (
+    select distinct tree.p_id from tree
   ) then 'Inner'
   else 'Leaf'
 end
-as type from Tree;
+as type from Tree tree order by id asc;
