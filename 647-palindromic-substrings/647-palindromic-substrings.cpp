@@ -1,24 +1,34 @@
 class Solution {
 private:
-  bool isPalindrome(string s, int l, int r) {
-    while (l<r) {
-      if(s[l] != s[r]) return false;
-      
-      l++;
-      r--;
-    }
+  int getPalindromeAroundCenter(string s, int c) {
+    int count = 1;
     
-    return true;
+    count += getCount(s, c-1, c+1);
+    count += getCount(s, c, c+1);
+  
+    return count;
   }
+  
+  int getCount(string s, int l, int r) {
+    int count = 0;
+    
+    while (l >= 0 && r < s.size()) {
+      if (s[l] != s[r]) break;
+      
+      count++;
+      l--;
+      r++;
+    }
+
+    return count;
+  }
+
   
 public:
   int countSubstrings(string s) {
-    int res = 0;
-    
+    int res = 0;  
     for (int i = 0; i < s.size(); i++) {
-      for (int j = i; j < s.size(); j++) {
-        if (isPalindrome(s, i, j)) res++;
-      }
+      res += getPalindromeAroundCenter(s, i);
     }
     
     return res;
