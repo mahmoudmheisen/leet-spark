@@ -7,7 +7,7 @@ public:
       int n = rings.size() / 2;
       if (n < 3) return 0;
       
-      for (int i = 0; i <= 9; i++) {
+      for (int i = 0; i < 10; i++) {
         m[i] = {0, 0, 0};
       }
       
@@ -17,7 +17,7 @@ public:
         if (rings[i*2] == 'B') m[rings[i*2 + 1] - '0'][2] += 1;
       }
       
-      for (int i = 0; i <= 9; i++) {
+      for (int i = 0; i < 10; i++) {
         if (m[i][0] && m[i][1] && m[i][2]) count++;
       }
       
