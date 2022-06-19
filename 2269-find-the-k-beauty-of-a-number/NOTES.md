@@ -1,1 +1,1 @@
-​
+sliding window to find k beauty in a number
