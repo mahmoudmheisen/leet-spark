@@ -7,20 +7,20 @@ public:
       
       if (n < k) return 0;
       
-      int current_beauty = stoi(s.substr(0, k));
+      int beauty_window = stoi(s.substr(0, k));
       
-      if (current_beauty && num % current_beauty == 0) count++;
+      // initial window
+      if (beauty_window && num % beauty_window == 0) count++;
       
-      int factor = 1;
-      for (int i = 1; i < k; i++) {
-        factor *= 10;
-      }
+      int factor = pow(10, k-1);
       
       for (int i = k; i < n; i++) {
-        current_beauty -= (s[i-k] - '0')*factor;
-        current_beauty *= 10;
-        current_beauty += (s[i] - '0');
-        if (current_beauty && num % current_beauty == 0) count++;
+        // update window
+        beauty_window -= (s[i-k] - '0') * factor;
+        beauty_window *= 10;
+        beauty_window += (s[i] - '0');
+        
+        if (beauty_window && num % beauty_window == 0) count++;
       }
       
       return count;
