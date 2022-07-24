@@ -4,10 +4,9 @@ public:
         int n = nums.size();
         vector<int> res(2*n);
         
-        for (int i = 0; i < nums.size() * 2; i++) {
-            if (i < n) res[i] = nums[i];
-            else res[i]=nums[i-n];
-            
+        for (int i = 0; i < nums.size(); i++) {
+            res[i] = nums[i];
+            res[i+n]=nums[i];
         }
         
         return res;        
