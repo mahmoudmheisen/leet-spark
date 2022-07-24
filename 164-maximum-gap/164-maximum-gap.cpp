@@ -6,10 +6,11 @@ public:
         // bucket sort
         vector<int> res;
 
-        // min, max
-        int maxN = *max_element(nums.begin(), nums.end());
-        int minN = *min_element(nums.begin(), nums.end());
+        // n, min, max
         int n = nums.size();
+        auto minmax = minmax_element(nums.begin(), nums.end());
+        int minN = *minmax.first;
+        int maxN = *minmax.second;        
 
         // create min and max bucket
         vector<int> min_bucket(n, INT_MAX);
@@ -40,3 +41,10 @@ public:
         return maxGap;
     }
 };
+
+//IO
+int _IO=[](){
+	ios::sync_with_stdio(0);
+	cin.tie(0); //cout.tie(0);
+	return 0;
+}();
