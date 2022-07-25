@@ -12,7 +12,7 @@ public:
         m[idKey] = value;
         
         vector<string> vec;
-        for(int i = 0; i < size; i++) {
+        for(int i = ptr; i <= size; i++) {
             if(m[ptr] != "") {vec.push_back(m[ptr]); ptr++;}
             else break;
         }
