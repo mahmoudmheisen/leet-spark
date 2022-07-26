@@ -8,9 +8,7 @@ public:
             m[c - 97]++;
         }
         
-        for(int i = 0; i < 26; i++) {
-            if(m[i] == 0) return false;
-        }
+        if(m.size() < 26) return false;
         
         return true;
     }
