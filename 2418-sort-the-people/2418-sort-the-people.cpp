@@ -7,19 +7,16 @@ private:
 public:
     vector<string> sortPeople(vector<string>& names, vector<int>& heights) {
         vector<string> ret;
-        vector<pair<int, string>> vec;
+        map<int, string, greater<int>> mapper;
         int n = names.size();
         
         for(int i = 0; i < n; i++) {
-            vec.push_back(make_pair(heights[i], names[i]));
+            mapper[heights[i]] = names[i];
         }
-        
-        sort(vec.begin(), vec.end(), my_compare);
-        
-        for(int i = 0; i < n; i++) {
-            ret.push_back(vec[i].second);
+                
+       for(auto i : mapper){
+            ret.push_back(i.second);
         }
-        
         return ret;
     }
 };
