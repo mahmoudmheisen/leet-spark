@@ -1,29 +1,20 @@
 class Solution {
-private:
-    vector<int> numsOfDigits(int num) {
-        vector<int> res;
-        while(num > 0) {
-            int n = num % 10;
-            num /= 10;
-            res.push_back(n);
-        }
-
-        return res;
-    }
-
 public:
-    int alternateDigitSum(int n) {
-        vector<int> digits = numsOfDigits(n);
+    int alternateDigitSum(int num) {
+        int count = 0;
         int sum = 0;
-
         int sign = 1;
-        if(digits.size() % 2 == 0) sign *= -1;
 
-        for(int digit : digits) {
-            sum += digit*sign;
+        while(num > 0) {
+            int last = num % 10;
+            num /= 10;
+            sum += last * sign;
             sign *= -1;
+            count++;
         }
         
+        if(count%2 == 0) sum *= -1;
+
         return sum;
     }
 };
