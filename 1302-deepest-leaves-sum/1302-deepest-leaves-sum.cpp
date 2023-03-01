@@ -23,7 +23,7 @@ private:
     void solve(TreeNode* root, int& sum, int height, int level) {
         if(!root) return;
         
-        if(level == height && !root->left && !root->right) sum += root->val;
+        if(level == height) sum += root->val;
         
         solve(root->left, sum, height, level+1);
         solve(root->right, sum, height, level+1);
@@ -32,11 +32,10 @@ private:
 public:
     int deepestLeavesSum(TreeNode* root) {
         int sum = 0;
+        
         int h = height(root);
         solve(root, sum, h, 1);
-        
-        cout << sum << endl;
-        
+                
         return sum;
     }
 };
