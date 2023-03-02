@@ -1,0 +1,1 @@
+js solution with no built in functions
