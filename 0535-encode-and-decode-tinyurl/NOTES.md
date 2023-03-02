@@ -1,0 +1,1 @@
+simple encode and decode, used a map as a database, and a unique code that is incremented internally
