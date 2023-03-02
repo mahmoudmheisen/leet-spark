@@ -14,3 +14,5 @@ ret.push_back(ans);
 }
 return ret;
 }
+#     math solution
+ans[i] = pref[i - 1] ^ pref[i];
