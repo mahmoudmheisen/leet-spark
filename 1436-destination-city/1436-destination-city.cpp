@@ -1,11 +1,11 @@
 class Solution {
 public:
     string destCity(vector<vector<string>>& paths) {
-        set<string> sources;
-        for(auto &path : paths) sources.insert(path[0]);
+        unordered_set<string> srcs;
+        for(auto &path : paths) srcs.insert(path[0]);
         
         for(auto &path : paths) {
-            if(sources.find(path[1]) == sources.end()) return path[1];
+            if(!srcs.count(path[1])) return path[1];
         }
         
         return "";
