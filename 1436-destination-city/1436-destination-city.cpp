@@ -2,18 +2,22 @@ class Solution {
 public:
     string destCity(vector<vector<string>>& paths) {
         int n = paths.size();
-        string ret = paths[0][1];
+        string str = "";
+        bool found = false;
         
         for(int i = 0; i < n; i++) {
-            int count = 0;
-            string str = paths[i][1];
-            for(int j = 0; j < n; j++) {
-                if(paths[j][0] == str) continue;
-                else count++;
-                if(count == n) return str;
+            str = paths[i][1];
+            found = false;
+
+            for(int j = 0; j < n && !found; j++) {
+                if(paths[j][0] == str) {
+                    found = true;
+                }
             }
+            
+            if(!found) break;
         }
         
-        return ret;
+        return str;
     }
 };
