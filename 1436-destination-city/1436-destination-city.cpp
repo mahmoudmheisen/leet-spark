@@ -1,23 +1,13 @@
 class Solution {
 public:
     string destCity(vector<vector<string>>& paths) {
-        int n = paths.size();
-        string str = "";
-        bool found = false;
+        set<string> sources;
+        for(auto &path : paths) sources.insert(path[0]);
         
-        for(int i = 0; i < n; i++) {
-            str = paths[i][1];
-            found = false;
-
-            for(int j = 0; j < n && !found; j++) {
-                if(paths[j][0] == str) {
-                    found = true;
-                }
-            }
-            
-            if(!found) break;
+        for(auto &path : paths) {
+            if(sources.find(path[1]) == sources.end()) return path[1];
         }
         
-        return str;
+        return "";
     }
 };
