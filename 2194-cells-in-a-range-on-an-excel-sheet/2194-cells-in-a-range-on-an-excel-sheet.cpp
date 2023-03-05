@@ -9,12 +9,10 @@ public:
         int ch1 = s[0];
         int ch2 = s[3];
         
-        for(int i = ch1; i <= ch2; i++) {
-            char ch = (char) i;
-
+        for(char i = ch1; i <= ch2; i++) {
             for(int j = num1; j <= num2; j++) {
                 string str = "";
-                str += ch + to_string(j);
+                str += i + to_string(j);
                 ret.push_back(str);
             }
         }
