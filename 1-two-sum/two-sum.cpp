@@ -7,16 +7,13 @@ public:
             ht.insert({nums[i], i});
         }
 
-        int i = 0;
-        int idx;
-        for(; i < nums.size(); i++) {
-            int search = target - nums[i];
-            if(ht.find(search) == ht.end()) continue;
-            idx = ht[search];
-            if(i == idx) continue;
-            break;
+        for(int i = 0; i < nums.size(); i++) {
+            int complement = target - nums[i];
+            if(ht.find(complement) != ht.end() && i != ht[complement]) {
+                return {i, ht[complement]};
+            }
         }
 
-        return {i, idx};
+        return {};
     }
 };
