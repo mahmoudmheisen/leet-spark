@@ -1,24 +1,31 @@
 class Solution {
-private:
-  vector<vector<int>> res;
-  
-  void bt(vector<int>& nums, int level) {
-    if (level == nums.size()) {
-      res.push_back(nums);
-      return;
-    }
-    
-    for (int i = level; i < nums.size(); i++) {
-      swap(nums[i], nums[level]);
-      bt(nums, level+1);
-      swap(nums[i], nums[level]);
-    }
-  }
 
 public:
+    vector<vector<int>> res;
+    unordered_set<int> used;
+
     vector<vector<int>> permute(vector<int>& nums) {
-      bt(nums, 0);
-      
-      return res;
+        vector<int> current;
+        bt(nums, current);
+        return res;
+    }
+
+    void bt(vector<int>& nums, vector<int>& current) {
+        if (current.size() == nums.size()) {
+            res.push_back(current);
+            return;
+        }
+
+        for (int num : nums) {
+            if (used.find(num) == used.end()) {
+                current.push_back(num);
+                used.insert(num);
+
+                bt(nums, current);
+
+                current.pop_back();
+                used.erase(num);
+            }
+        }
     }
 };
