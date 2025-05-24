@@ -2,7 +2,6 @@ class Solution {
 
 public:
     vector<vector<int>> res;
-    unordered_set<int> used;
 
     vector<vector<int>> permute(vector<int>& nums) {
         vector<int> current;
@@ -17,14 +16,12 @@ public:
         }
 
         for (int num : nums) {
-            if (used.find(num) == used.end()) {
+            if (find(current.begin(), current.end(), num) == current.end()) {
                 current.push_back(num);
-                used.insert(num);
 
                 bt(nums, current);
 
                 current.pop_back();
-                used.erase(num);
             }
         }
     }
