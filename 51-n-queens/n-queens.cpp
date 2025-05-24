@@ -30,13 +30,8 @@ public:
             d_set.insert(diag);
             ad_set.insert(anti_diag);
 
-            string row_str = "";
-            for (int i = 0; i < n; i++) {
-                if (i == col)
-                    row_str += "Q";
-                else
-                    row_str += ".";
-            }
+            string row_str = string(n,'.');
+            row_str[col] = 'Q';
             current.push_back(row_str);
 
             bt(row + 1, n, c_set, d_set, ad_set, res, current);
