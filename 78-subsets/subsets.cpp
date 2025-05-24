@@ -9,11 +9,15 @@ public:
 
     void bt(vector<int>& nums, vector<int> current, vector<vector<int>>& res,
             int level) {
-        res.push_back(current);
-        for (int i = level; i < nums.size(); i++) {
-            current.push_back(nums[i]);
-            bt(nums, current, res, i+1);
-            current.pop_back();
+        if (level == nums.size()) {
+            res.push_back(current);
+            return;
         }
+        
+        current.push_back(nums[level]);
+        bt(nums, current, res, level+1);
+
+        current.pop_back();
+        bt(nums, current, res, level+1);
     }
 };
