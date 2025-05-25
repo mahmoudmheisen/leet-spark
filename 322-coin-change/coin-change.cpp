@@ -6,10 +6,8 @@ public:
 
         for (int i = 1; i <= amount; i++) {
             for (int coin : coins) {
-                if ((i - coin) >= 0) {
-                    int current = dp[i - coin];
-                    dp[i] =
-                        min(dp[i], current == INT_MAX ? current : current + 1);
+                if ((i - coin) >= 0 && dp[i - coin] != INT_MAX) {
+                    dp[i] = min(dp[i], dp[i - coin] + 1);
                 }
             }
         }
