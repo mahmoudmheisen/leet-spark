@@ -1,17 +1,17 @@
 class Solution {
 public:
     int climbStairs(int n) {
-        unordered_map<int, int> memo;
-        return dp(n, memo);
-    }
+        vector<int> dp(n+1);
+        if (n <= 2)
+            return n;
 
-    int dp(int n, unordered_map<int, int>& memo) {
-        if (n <= 2) return n;
+        dp[1] = 1;
+        dp[2] = 2;
 
-        if(memo.count(n)) return memo[n];
+        for(int i = 3; i<= n; i++) {
+            dp[i] = dp[i-1] + dp[i-2];
+        }
 
-        memo[n] = dp(n-1, memo) + dp(n-2, memo);
-
-        return memo[n];
+        return dp[n];
     }
 };
