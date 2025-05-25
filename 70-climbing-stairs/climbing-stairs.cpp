@@ -1,17 +1,18 @@
 class Solution {
 public:
     int climbStairs(int n) {
-        vector<int> dp(n+1);
         if (n <= 2)
             return n;
 
-        dp[1] = 1;
-        dp[2] = 2;
+        int prev = 2;
+        int pre_prev = 1;
 
         for(int i = 3; i<= n; i++) {
-            dp[i] = dp[i-1] + dp[i-2];
+            int current = prev + pre_prev;
+            pre_prev = prev;
+            prev = current;
         }
 
-        return dp[n];
+        return prev;
     }
 };
