@@ -1,17 +1,18 @@
 class Solution {
 public:
     int uniquePaths(int m, int n) {
-        vector<int> prev(n, 1);
-        vector<int> current(n, 1);
+        vector<vector<int>> memo(m, vector<int>(n, 0));
+        return dp(m - 1, n - 1, memo);
+    }
 
-        for(int r = 1; r < m; r++) {
-            fill(current.begin(), current.end(), 1);
-            for(int c = 1; c < n; c++) {
-                current[c] = prev[c] + current[c-1];
-            }
-            prev = current;
-        }
+    int dp(int m, int n, vector<vector<int>>& memo) {
+        if (!m || !n)
+            return 1;
 
-        return current[n-1];
+        if (memo[m][n])
+            return memo[m][n];
+
+        memo[m][n] = dp(m - 1, n, memo) + dp(m, n - 1, memo);
+        return memo[m][n];
     }
 };
