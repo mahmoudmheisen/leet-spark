@@ -51,10 +51,7 @@ public:
             temp = temp->next;
         }
 
-        if (l1)
-            temp->next = l1;
-        if (l2)
-            temp->next = l2;
+        temp->next = l1 ? l1 : l2;
 
         return res->next;
     }
