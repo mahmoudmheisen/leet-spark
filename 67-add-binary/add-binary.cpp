@@ -2,51 +2,30 @@ class Solution {
 public:
     string addBinary(string a, string b) {
         string res = "";
-        char curry = '0';
-        int aPointer = a.length() - 1;
-        int bPointer = b.length() - 1;
+        int n = a.length();
+        int m = b.length();
+        int zeroBits = abs(n - m);
 
-        while (aPointer >= 0 && bPointer >= 0) {
-            char currentCurry = '0';
-            char sum = sumBinaryChars(a[aPointer], b[bPointer], currentCurry);
-
-            
-            sum = sumBinaryChars(sum, curry, curry);
-            curry = sumBinaryChars(currentCurry, curry, curry);
-            res = sum + res;
-
-            aPointer--;
-            bPointer--;
+        for (int i = 0; i < zeroBits; i++) {
+            if (m < n)
+                b = "0" + b;
+            else
+                a = "0" + a;
         }
 
-        while (aPointer >= 0) {
-            char sum = sumBinaryChars(a[aPointer], curry, curry);
-            res = sum + res;
-            aPointer--;
+        int c = 0;
+
+        for(int i = a.length()-1; i >=0; i--) {
+            int s1 = a[i] - '0';
+            int s2 = b[i] - '0';
+
+            int sum = s1 + s2 + c;
+            c = sum / 2;
+            sum %= 2;
+
+            res = to_string(sum) + res;
         }
 
-        while (bPointer >= 0) {
-            char sum = sumBinaryChars(b[bPointer], curry, curry);
-            res = sum + res;
-            bPointer--;
-        }
-
-        return curry == '1' ? curry + res : res;
-    }
-
-    char sumBinaryChars(char a, char b, char& curry) {
-        char sum = '0';
-        if (a == '0' && b == '0') {
-            curry = '0';
-            sum = '0';
-        } else if ((a == '1' && b == '0') || (a == '0' && b == '1')) {
-            curry = '0';
-            sum = '1';
-        } else if (a == '1' && b == '1') {
-            curry = '1';
-            sum = '0';
-        }
-
-        return sum;
+        return c ? to_string(c) + res : res;
     }
 };
