@@ -1,37 +1,23 @@
 class Solution {
 public:
     int findKthLargest(vector<int>& nums, int k) {
-        return quickSelect(nums, 0, nums.size() - 1, k);
-    }
+        int minV = *min_element(nums.begin(), nums.end());
+        int maxV = *max_element(nums.begin(), nums.end());
 
-    int quickSelect(vector<int>& nums, int l, int r, int k) {
-        int n = nums.size();
-        if (l >= r)
-            return nums[l];
+        vector<int> count(maxV - minV + 1, 0);
 
-        int randIdx = rand() % (r - l) + l;
-        swap(nums[randIdx], nums[r]);
-        int p = partition(nums, l, r);
-
-        if (p > (n - k))
-            return quickSelect(nums, l, p - 1, k);
-        else if (p < n - k)
-            return quickSelect(nums, p + 1, r, k);
-        else
-            return nums[n - k];
-    }
-
-    int partition(vector<int>& nums, int l, int r) {
-        int p = nums[r];
-        int lo = l;
-
-        for (int i = l; i < r; i++) {
-            if (nums[i] < p) {
-                swap(nums[lo], nums[i]);
-                lo++;
-            }
+        for (int num : nums) {
+            count[num - minV] += 1;
         }
-        swap(nums[lo], nums[r]);
-        return lo;
+
+        int remain = k;
+        for(int i = count.size()-1; i >=0; i--) {
+            remain -= count[i];
+
+            if(remain <= 0)
+                return i + minV;
+        }
+
+        return 1;
     }
 };
