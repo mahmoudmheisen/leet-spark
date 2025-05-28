@@ -1,16 +1,15 @@
 class Solution {
 public:
     string convertToBase7(int num) {
-        string base7Representation = "";
+        int res = 0;
         
-        if (num == 0) return "0";
-        if (num < 0) return "-" + convertToBase7(-num);
-
+        int i = 1;
         while (num) {
-            base7Representation = to_string(num % 7) + base7Representation;
+            res += (num % 7) * i;
             num /= 7;
+            i *= 10;
         }
 
-        return base7Representation;
+        return to_string(res);
     }
 };
