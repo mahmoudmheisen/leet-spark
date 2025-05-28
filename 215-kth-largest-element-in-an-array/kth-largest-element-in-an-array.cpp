@@ -18,6 +18,6 @@ public:
                 return i + minV;
         }
 
-        return 1;
+        return -1;
     }
 };
