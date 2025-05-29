@@ -17,20 +17,21 @@ public:
         ListNode* leader = head;
         ListNode* trailer = head;
 
-        int k = 0;
+        int i = 0;
         while (leader->next) {
-            k++;
+            i++;
             leader = leader->next;
-            if (k > n)
+            if (i > n)
                 trailer = trailer->next;
         }
 
-        if (k + 1 == n)
+        if (n == i + 1)
             return head->next;
 
         ListNode* temp = trailer->next;
         trailer->next = trailer->next->next;
         temp->next = nullptr;
+        delete temp;
 
         return head;
     }
