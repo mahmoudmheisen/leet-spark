@@ -26,7 +26,7 @@ public:
             leader = leader->next;
         }
         
-        while(leader && leader->next) {
+        while(leader->next) {
             leader = leader->next;
             trailer = trailer->next;
         }
