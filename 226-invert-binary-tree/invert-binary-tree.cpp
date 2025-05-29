@@ -14,12 +14,20 @@ public:
     TreeNode* invertTree(TreeNode* root) {
         if(!root) return root;
 
-        TreeNode* temp = root->left;
-        root->left = root->right;
-        root->right = temp;
+        stack<TreeNode*> st;
+        st.push(root);
 
-        invertTree(root->left);
-        invertTree(root->right);
+        while(!st.empty()) {
+            TreeNode* node = st.top();
+            st.pop();
+
+            TreeNode* temp = node->left;
+            node->left = node->right;
+            node->right = temp;
+
+            if(node->right) st.push(node->right);
+            if(node->left) st.push(node->left);
+        }
 
         return root;
     }
