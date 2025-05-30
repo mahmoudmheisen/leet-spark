@@ -8,23 +8,21 @@ public:
         int secondP = 0;
 
         while (firstP < firstList.size() && secondP < secondList.size()) {
-            vector<int> current = firstList[firstP];
-            vector<int> next = secondList[secondP];
-            if (isOverlab(current, next)) {
-                intersections.push_back(
-                    {max(current[0], next[0]), min(current[1], next[1])});
-
-                if (current[1] > next[1]) {
-                    secondP++;
-                } else {
-                    firstP++;
-                }
+            vector<int> a, b;
+            if (firstList[firstP][0] <= secondList[secondP][0]) {
+                a = firstList[firstP];
+                b = secondList[secondP];
             } else {
-                if (current[1] > next[1]) {
-                    secondP++;
-                } else {
-                    firstP++;
-                }
+                a = secondList[secondP];
+                b = firstList[firstP];
+            }
+            if (a[1] >= b[0]) {
+                intersections.push_back({b[0], min(a[1], b[1])});
+            }
+            if (firstList[firstP][1] <= secondList[secondP][1]) {
+                firstP++;
+            } else {
+                secondP++;
             }
         }
 
