@@ -28,11 +28,4 @@ public:
 
         return intersections;
     }
-
-    bool isOverlab(vector<int>& current, vector<int>& next) {
-        if (current[0] < next[0]) {
-            return current[1] >= next[0];
-        }
-        return next[1] >= current[0];
-    }
 };
