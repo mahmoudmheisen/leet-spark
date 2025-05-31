@@ -11,10 +11,13 @@ public:
         for (char ch : s) {
             if (ht.count(ch)) {
                 st.push(ch);
-            } else if (st.empty() || ht[st.top()] != ch) {
-                return false;
             } else {
+                if(st.empty()) return false;
+                char top = st.top();
                 st.pop();
+                if (ht[top] != ch) {
+                    return false;
+                }
             }
         }
 
