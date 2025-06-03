@@ -27,7 +27,7 @@ public:
     double findMedian() {
         double median = 0;
         if (leftHeap.size() == rightHeap.size()) {
-            median = (double) (leftHeap.top() + rightHeap.top()) / 2;
+            median = (leftHeap.top() + rightHeap.top()) / 2.0;
         } else {
             median = leftHeap.top();
         }
