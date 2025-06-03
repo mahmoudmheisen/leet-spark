@@ -1,22 +1,16 @@
-class Compare {
-public:
-    bool operator()(pair<string, int> a, pair<string, int> b)
-    {
-        if (a.second == b.second) {
-            return a.first < b.first;
-        }
-
-        return a.second > b.second;
-    }
-};
-
 class Solution {
 public:
     vector<string> topKFrequent(vector<string>& words, int k) {
         vector<string> res;
         unordered_map<string, int> ht;
         priority_queue<pair<string, int>, vector<pair<string, int>>,
-                       Compare>
+                       decltype([](const pair<string, int>& a,
+                          const pair<string, int>& b) {
+                           if (a.second == b.second) {
+                               return a.first < b.first;
+                           }
+                           return a.second > b.second;
+                       })>
             minHeap;
 
         for (string word : words) {
@@ -26,15 +20,15 @@ public:
                 ht[word] = 1;
         }
 
-        for (auto pair: ht) {
+        for (auto pair : ht) {
             minHeap.push(pair);
 
-            if(minHeap.size() > k) {
+            if (minHeap.size() > k) {
                 minHeap.pop();
             }
         }
 
-        while(!minHeap.empty()) {
+        while (!minHeap.empty()) {
             res.push_back(minHeap.top().first);
             minHeap.pop();
         }
