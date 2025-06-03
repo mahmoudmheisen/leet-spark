@@ -10,28 +10,23 @@ public:
         if (leftHeap.empty() || num <= leftHeap.top()) {
             leftHeap.push(num);
             if (leftHeap.size() - rightHeap.size() > 1) {
-                int left = leftHeap.top();
+                rightHeap.push(leftHeap.top());
                 leftHeap.pop();
-                rightHeap.push(left);
             }
         } else {
             rightHeap.push(num);
             if (rightHeap.size() > leftHeap.size()) {
-                int right = rightHeap.top();
+                leftHeap.push(rightHeap.top());
                 rightHeap.pop();
-                leftHeap.push(right);
             }
         }
     }
 
     double findMedian() {
-        double median = 0;
-        if (leftHeap.size() == rightHeap.size()) {
-            median = (leftHeap.top() + rightHeap.top()) / 2.0;
-        } else {
-            median = leftHeap.top();
+        if (leftHeap.size() > rightHeap.size()) {
+            return leftHeap.top();
         }
-        return median;
+        return (leftHeap.top() + rightHeap.top()) / 2.0;
     }
 };
 
