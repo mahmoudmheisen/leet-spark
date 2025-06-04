@@ -9,10 +9,8 @@ public:
 
         for (int t = 1; t < amount + 1; t++) {
             for (int coin : coins) {
-                if (t >= coin) {
-                    dp[t] =
-                        min(dp[t], dp[t - coin] == INT_MAX ? INT_MAX
-                                                           : dp[t - coin] + 1);
+                if (t >= coin && dp[t - coin] != INT_MAX) {
+                    dp[t] = min(dp[t], dp[t - coin] + 1);
                 }
             }
         }
