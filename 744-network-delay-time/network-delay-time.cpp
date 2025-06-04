@@ -16,7 +16,6 @@ public:
         }
 
         minHeap.push({k, 0});
-        minCost[k] = 0;
         while (!minHeap.empty()) {
             vector<int> node = minHeap.top();
             minHeap.pop();
