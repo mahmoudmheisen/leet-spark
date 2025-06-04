@@ -41,7 +41,6 @@ public:
         }
 
         for (auto [_, cost] : minCost) {
-            cout << _ << " " << cost << endl;
             minTime = max(cost, minTime);
         }
 
