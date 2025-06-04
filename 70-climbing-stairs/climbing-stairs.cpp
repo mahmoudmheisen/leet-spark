@@ -1,18 +1,19 @@
 class Solution {
 public:
     int climbStairs(int n) {
+        unordered_map<int, int> memo;
+
+        return dp(n, memo);
+    }
+
+    int dp(int n, unordered_map<int, int>& memo) {
         if (n <= 2)
             return n;
 
-        int prev = 2;
-        int pre_prev = 1;
+        if (memo.count(n))
+            return memo[n];
 
-        for(int i = 3; i<= n; i++) {
-            int current = prev + pre_prev;
-            pre_prev = prev;
-            prev = current;
-        }
-
-        return prev;
+        memo[n] = dp(n - 1, memo) + dp(n - 2, memo);
+        return memo[n];
     }
 };
