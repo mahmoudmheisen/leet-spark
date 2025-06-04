@@ -22,7 +22,12 @@ public:
 
             int nodeId = node[0];
             int nodeCost = node[1];
-            
+
+            if (minCost.count(nodeId) && nodeCost > minCost[nodeId])
+                continue;
+
+            minCost[nodeId] = nodeCost;
+
             vector<vector<int>> nodeNeighbors = graph[nodeId];
 
             for (auto neighbor : nodeNeighbors) {
@@ -30,8 +35,8 @@ public:
                 int neighborCost = neighbor[1];
 
                 int newCost = nodeCost + neighborCost;
-                if (!minCost.count(neighborId) || minCost[neighborId] > newCost) {
-                    minCost[neighborId] = newCost;
+                if (!minCost.count(neighborId) ||
+                    minCost[neighborId] > newCost) {
                     minHeap.push({neighborId, newCost});
                 }
             }
