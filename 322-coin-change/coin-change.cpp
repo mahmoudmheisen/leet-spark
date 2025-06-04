@@ -1,17 +1,29 @@
 class Solution {
 public:
     int coinChange(vector<int>& coins, int amount) {
-        vector<int> dp(amount + 1, INT_MAX);
-        dp[0] = 0;
+        unordered_map<int, int> memo;
 
-        for (int i = 1; i <= amount; i++) {
-            for (int coin : coins) {
-                if ((i - coin) >= 0 && dp[i - coin] != INT_MAX) {
-                    dp[i] = min(dp[i], dp[i - coin] + 1);
-                }
+        int coinsCount = dp(coins, amount, memo);
+
+        return coinsCount == INT_MAX ? -1 : coinsCount;
+    }
+
+    int dp(vector<int>& coins, int amount, unordered_map<int, int>& memo) {
+        if (amount == 0)
+            return 0;
+
+        if (memo.count(amount))
+            return memo[amount];
+
+        int minCoin = INT_MAX;
+        for (int coin : coins) {
+            if (amount >= coin) {
+                int current = dp(coins, amount - coin, memo);
+                 minCoin = min(minCoin, current == INT_MAX ? INT_MAX : current + 1);
             }
         }
 
-        return dp[amount] == INT_MAX ? -1 : dp[amount];
+        memo[amount] = minCoin;
+        return minCoin;
     }
 };
