@@ -2,7 +2,6 @@ class Solution {
 public:
     int networkDelayTime(vector<vector<int>>& times, int n, int k) {
         int minTime = INT_MIN;
-        set<int> processedNodes;
         unordered_map<int, vector<vector<int>>> graph;
         unordered_map<int, int> minCost;
         priority_queue<vector<int>, vector<vector<int>>,
@@ -24,11 +23,9 @@ public:
             int nodeId = node[0];
             int nodeCost = node[1];
 
-            if (processedNodes.count(nodeId))
+            if (nodeCost > minCost[nodeId])
                 continue;
             
-            processedNodes.insert(nodeId);
-
             vector<vector<int>> nodeNeighbors = graph[nodeId];
 
             for (auto neighbor : nodeNeighbors) {
