@@ -16,6 +16,7 @@ public:
         }
 
         minHeap.push({k, 0});
+        minCost[k] = 0;
         while (!minHeap.empty()) {
             vector<int> node = minHeap.top();
             minHeap.pop();
@@ -26,7 +27,6 @@ public:
             if (processedNodes.count(nodeId))
                 continue;
             
-            minCost[nodeId] = nodeCost;
             processedNodes.insert(nodeId);
 
             vector<vector<int>> nodeNeighbors = graph[nodeId];
