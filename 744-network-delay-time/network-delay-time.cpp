@@ -22,9 +22,6 @@ public:
 
             int nodeId = node[0];
             int nodeCost = node[1];
-
-            if (nodeCost > minCost[nodeId])
-                continue;
             
             vector<vector<int>> nodeNeighbors = graph[nodeId];
 
