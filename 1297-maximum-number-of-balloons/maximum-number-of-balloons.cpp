@@ -4,23 +4,23 @@ public:
         string target = "balloon";
         int maxBalloons = INT_MAX;
         unordered_map<char, int> processed;
-        unordered_map<char, int> ht;
+        unordered_map<char, int> occurance;
 
         for (char character : text) {
-            if (ht.count(character))
-                ht[character]++;
+            if (occurance.count(character))
+                occurance[character]++;
             else
-                ht[character] = 1;
+                occurance[character] = 1;
         }
 
         for (char character : target) {
             if (!processed.count(character)) {
-                maxBalloons = min(maxBalloons, ht[character]);
+                maxBalloons = min(maxBalloons, occurance[character]);
                 processed[character] = 1;
             } else {
                 processed[character]++;
                 maxBalloons =
-                    min(maxBalloons, ht[character] / processed[character]);
+                    min(maxBalloons, occurance[character] / processed[character]);
             }
         }
 
