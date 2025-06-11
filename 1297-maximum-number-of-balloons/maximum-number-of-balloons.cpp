@@ -7,10 +7,7 @@ public:
         unordered_map<char, int> occurance;
 
         for (char character : text) {
-            if (occurance.count(character))
-                occurance[character]++;
-            else
-                occurance[character] = 1;
+            occurance[character]++;
         }
 
         for (char character : target) {
